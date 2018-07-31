@@ -24,7 +24,7 @@ public class Pacman extends Actor {
     }
 
     @Override
-    public void render(GraphicsContext gc, double time) {
+    public void render(GraphicsContext gc) {
         gc.setFill(new Color(1.00, 1.00, 0.50, 1.0));
         gc.setStroke(new Color(0, 0, 0, 1));
         gc.fillOval(getX(), getY(), getSize(), getSize());
@@ -33,12 +33,14 @@ public class Pacman extends Actor {
     String lastStatus = "";
 
     @Override
-    public void update(GraphicsContext gc, double time) {
-        String now = String.format("%s (%d,%d) => (%d,%d) direction:%s buffer:%s canTurn:%s\n", getStatus(), getGridX(), getGridY(), getX(), getY(), getDirection(), getBuffer(), canTurn());
-        if (!lastStatus.equals(now)) {
-            System.out.print(now);
-        }
-        lastStatus = now;
+    public void update(GraphicsContext gc) {
+        direcionar(); //Obtem comandos do jogador
+        mover(); //Realiza o movimento
+        checkPathCollision(); //Colidiu com Path?
+        checkGhostCollision(); //Colidiu com Ghost?
+    }
+    
+    private void direcionar() {
         if (isPressed(UP)) {
             direcionar(UP, getSpeed());
         } else if (isPressed(DOWN)) {
@@ -48,11 +50,16 @@ public class Pacman extends Actor {
         } else if (isPressed(RIGHT)) {
             direcionar(RIGHT, getSpeed());
         }
-        mover();
+    }
+
+    private void checkPathCollision() {
         if (mapObject.getStaticEntity(this.getGridX(), this.getGridY()) instanceof Path && !(((Path) mapObject.getStaticEntity(this.getGridX(), getGridY())).getCapturado())) {
             ((Path) mapObject.getStaticEntity(this.getGridX(), getGridY())).capturar();
             UserInterface.addScore(100);
         }
+    }
+
+    private void checkGhostCollision() {
         for (GameObject g : OOPacman.entityObjectList) {
             if (g instanceof Ghost) {
                 int psize = getSize()-7; // Mais fácil de ser pego

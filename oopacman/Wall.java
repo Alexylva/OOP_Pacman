@@ -28,7 +28,7 @@ public class Wall extends StaticEntity {
     }
 
     @Override
-    public void render(GraphicsContext gc, double time) {
+    public void render(GraphicsContext gc) {
         gc.setFill(getColor());
         gc.setStroke(new Color(0,0,0,1));
         gc.fillRect(getX(), getY(), getSize(), getSize());
@@ -36,7 +36,7 @@ public class Wall extends StaticEntity {
     }
 
     @Override
-    public void update(GraphicsContext gc, double time) {}
+    public void update(GraphicsContext gc) {}
     
     
     

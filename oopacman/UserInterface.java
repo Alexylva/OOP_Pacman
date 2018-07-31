@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class UserInterface implements UIObject {
+public class UserInterface implements GameObject {
 
         private static int score = 0;
         private final double x, y;
@@ -29,7 +29,7 @@ public class UserInterface implements UIObject {
         }
 
         @Override
-        public void render(GraphicsContext gc, double time ){
+        public void render(GraphicsContext gc){
             gc.save();
             gc.translate(this.x,this.y);
             gc.setFill(new Color(1,1,1,1));
@@ -41,7 +41,7 @@ public class UserInterface implements UIObject {
         }
 
 
-        public void update( GraphicsContext gc, double time ){
+        public void update( GraphicsContext gc){
 
         }
 }

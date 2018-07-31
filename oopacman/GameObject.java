@@ -13,7 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public interface GameObject {
 
-    public void render(GraphicsContext gc, double time);
+    public void render(GraphicsContext gc);
 
-    public void update(GraphicsContext gc, double time);
+    public void update(GraphicsContext gc);
 }

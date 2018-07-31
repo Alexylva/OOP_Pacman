@@ -22,7 +22,6 @@ import static oopacman.OOPacman.*;
 public class Draw extends AnimationTimer {
 
     public static long frameCount = 0;
-    private LongValue lastNanoTime;
 
     public static enum Mode {
         MENU, GAME, GAMEOVER, WIN
@@ -30,14 +29,12 @@ public class Draw extends AnimationTimer {
     private static Mode mode;
     private int level, selection = 0;
 
-    public Draw(LongValue lastNanoTime) {
-        this.lastNanoTime = lastNanoTime;
+    public Draw() {
         setMode(Mode.MENU);
     }
 
     @Override
     public void handle(long currentNanoTime) {
-        double elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         
         switch (getMode()) {
             case MENU:
@@ -73,14 +70,14 @@ public class Draw extends AnimationTimer {
                 graphics.fill();
                 graphics.fillRect(0, 0, WIDTH, HEIGHT);
 
-                updateEntities(uiObjectList, elapsedTime);
-                renderEntities(uiObjectList, elapsedTime);
+                updateEntities(uiObjectList);
+                renderEntities(uiObjectList);
 
                 graphics.save();
                 graphics.translate(gameAreaObject.getX(), gameAreaObject.getY()); //Seta novo ponto 0,0 no canto da gameArea
-                renderEntities(mapObjectList, elapsedTime);
-                updateEntities(entityObjectList, elapsedTime);
-                renderEntities(entityObjectList, elapsedTime);
+                renderEntities(mapObjectList);
+                updateEntities(entityObjectList);
+                renderEntities(entityObjectList);
                 graphics.restore();
                 frameCount++;
                 break;
@@ -104,10 +101,10 @@ public class Draw extends AnimationTimer {
         Draw.mode = mode;
     }
 
-    public void updateEntities(ArrayList<GameObject> gameobjects, double time) {
+    public void updateEntities(ArrayList<GameObject> gameobjects) {
         for (GameObject gob : gameobjects) {
             if (gob != null) {
-                gob.update(graphics, time);
+                gob.update(graphics);
             }
         }
     }
@@ -118,10 +115,10 @@ public class Draw extends AnimationTimer {
      * @param gameobjects Array de entidades
      * @param time Tempo atual
      */
-    public void renderEntities(ArrayList<GameObject> gameobjects, double time) {
+    public void renderEntities(ArrayList<GameObject> gameobjects) {
         for (GameObject gob : gameobjects) {
             if (gob != null) {
-                gob.render(graphics, time);
+                gob.render(graphics);
             }
         }
     }

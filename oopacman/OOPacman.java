@@ -65,9 +65,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         
         setupObjects(); //Adiciona os objetos a Array gameObjects;
 
-        LongValue lastNanoTime = new LongValue(System.nanoTime()); //Obtem o tempo atual, classe LongValue apenas para evitar erro de contexto estatico
-        //new Draw(lastNanoTime).start()
-        new Draw(lastNanoTime).start(); //Loop da logica do jogo, essa função é chamada a cada frame
+        new Draw().start(); //Loop da logica do jogo, essa função é chamada a cada frame
 
         stage.show(); //Exibe a GUI do jogo
     }

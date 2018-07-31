@@ -21,7 +21,7 @@ public class Path extends StaticEntity {
     }
 
     @Override
-    public void render(GraphicsContext gc, double time) {
+    public void render(GraphicsContext gc) {
         Color fill;
         if (capturado) { fill = new Color(0,0,0,1); }
         else { fill = new Color(1.0, 1.0, 0, 1); }
@@ -34,7 +34,7 @@ public class Path extends StaticEntity {
     }
 
     @Override
-    public void update(GraphicsContext gc, double time) {
+    public void update(GraphicsContext gc) {
         //deve mudar caso this.capturado ser true
     }
 

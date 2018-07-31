@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  *
  * @author Alexylva
  */
-public class GameArea implements UIObject {
+public class GameArea implements GameObject {
     private final double width, height, x, y;
     
     public GameArea(double width, double height, double x, double y) {
@@ -40,12 +40,12 @@ public class GameArea implements UIObject {
     }
 
     @Override
-    public void render(GraphicsContext gc, double time) {
+    public void render(GraphicsContext gc) {
         gc.setFill(new Color(0.0, 0.0, 0.0, 1.0));
         gc.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 
     @Override
-    public void update(GraphicsContext gc, double time) {}
+    public void update(GraphicsContext gc) {}
     
 }
