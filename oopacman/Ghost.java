@@ -20,7 +20,7 @@ public class Ghost extends Actor {
 
     public Ghost(int x, int y, Color cor) {
         super(x, y, "Ghost");
-        setSize((int) Math.floor(OOPacman.ga.getWidth() * 0.05));
+        setSize((int) Math.floor(OOPacman.gameAreaObject.getWidth() * 0.05));
         setSpeed(20);
         setCor(cor);
     }
@@ -39,8 +39,7 @@ public class Ghost extends Actor {
 
     @Override
     public void update(GraphicsContext gc, double time) {
-        if (getStatus() == IDLE || Draw.frameCount%100 == 0) {
-            System.out.println(time);
+        if (getStatus() == IDLE || Draw.frameCount%100   == 0) {
             direcionar(Key.getRandomDir(), getSpeed());
         }
         mover();

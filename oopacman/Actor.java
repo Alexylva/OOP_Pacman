@@ -7,7 +7,7 @@ package oopacman;
 
 import static oopacman.Actor.Status.*;
 import static oopacman.Key.*;
-import static oopacman.OOPacman.map;
+import static oopacman.OOPacman.mapObject;
 
 /**
  *
@@ -64,7 +64,7 @@ abstract class Actor extends Entity {
                         setStatus(MOVING);
                     }
                 case MOVING:
-                    wall = map.dirIsFree(getGridX(), getGridY(), getDirection());
+                    wall = mapObject.dirIsFree(getGridX(), getGridY(), getDirection());
                     if (wall != null) {
                         switch (getDirection()) {
                             case UP:
@@ -100,23 +100,24 @@ abstract class Actor extends Entity {
     }
     
     public boolean canTurn() {
-        return (getSubX()+getSize()-6 <= map.squareSize && getSubY()+getSize()-6 <= map.squareSize);
+        return true;
+        //return (getSubX()+getSize()-6 <= map.squareSize && getSubY()+getSize()-6 <= map.squareSize);
     }
 
     public float getSubX() {
-        return getX() % map.squareSize;
+        return getX() % mapObject.squareSize;
     }
 
     public float getSubY() {
-        return getY() % map.squareSize;
+        return getY() % mapObject.squareSize;
     }
 
     public int getGridX() {
-        return map.xyToGrid(getX(), getY())[0];
+        return mapObject.xyToGrid(getX(), getY())[0];
     }
 
     public int getGridY() {
-        return map.xyToGrid(getX(), getY())[1];
+        return mapObject.xyToGrid(getX(), getY())[1];
     }
 
     public Key getBuffer() {
