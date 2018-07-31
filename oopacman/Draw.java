@@ -94,6 +94,7 @@ public class Draw extends AnimationTimer {
                     setMode(Draw.Mode.MENU);
                 }
                 OOPacman.setupGame(level);
+                setMode(Draw.Mode.GAME);
                 break;
 
         }
