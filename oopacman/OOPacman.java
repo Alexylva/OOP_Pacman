@@ -17,24 +17,25 @@ import javafx.stage.Stage;
 
 public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
-    static GraphicsContext gc;
-    static int width = 800;
-    static int height = 600;  
+    static GraphicsContext graphics;
+    static final int WIDTH = 800;
+    static final int HEIGHT = 600;  
+    static final int NUM_MAPS = 5;
     
     //Entidades que possuem metodos render() e update();
-    static ArrayList<GameObject> uiObject = new ArrayList<>(); //Desenhados no geral
-    static ArrayList<GameObject> entityObject = new ArrayList<>(); //Desenhados em GameArea
-    static ArrayList<GameObject> mapObject = new ArrayList<>();
+    static ArrayList<GameObject> uiObjectList = new ArrayList<>(); //Desenhados no geral
+    static ArrayList<GameObject> entityObjectList = new ArrayList<>(); //Desenhados em GameArea
+    static ArrayList<GameObject> mapObjectList = new ArrayList<>();
     
-    static ArrayList<String> mapsList = new ArrayList<>();
+    static ArrayList<String> mapsFileList = new ArrayList<>();
     
-    static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
-    static Map map;
-    static UserInterface ui = new UserInterface(width * 0.65,height*0.03);
+    static GameArea gameAreaObject = new GameArea(WIDTH * 0.533, HEIGHT * 0.947, WIDTH * 0.1, HEIGHT * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
+    static Map mapObject;
+    static UserInterface uiObject = new UserInterface(WIDTH * 0.65,HEIGHT*0.03);
     
     
     
-    static ArrayList<String> input = new ArrayList<>(); //Array que conterá as teclas pressionadas; //Lista de teclas pressionadas
+    static ArrayList<String> inputArray = new ArrayList<>(); //Array que conterá as teclas pressionadas; //Lista de teclas pressionadas
 
     @Override
     public void start(Stage stage) {
@@ -44,17 +45,17 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
         Group root = new Group(); //Grupo raiz, onde são adicionados todos os elementos
         
-        Canvas canvas = new Canvas(width, height); //Nossa tela
+        Canvas canvas = new Canvas(WIDTH, HEIGHT); //Nossa tela
         root.getChildren().add(canvas); //Adiciona a tela ao grupo
         
-        gc = canvas.getGraphicsContext2D(); //Obtem a instancia do GraphicsContext2D
+        graphics = canvas.getGraphicsContext2D(); //Obtem a instancia do GraphicsContext2D
         
         Scene pacmanScene = new Scene(root); //Cena principal
         
         stage.setScene(pacmanScene); //Determina a cena exibida no stage
         
-        for (int i = 1; i <= 5; i++) {
-            mapsList.add(String.format("maps/map%d.txt",i)); //Lista de mapas
+        for (int i = 1; i <= NUM_MAPS; i++) {
+            mapsFileList.add(String.format("maps/map%d.txt",i)); //Lista de mapas
         }
 
         //Comandos que determinam qual classes serão chamadas no evento de pressionamento e soltura de teclas 
@@ -71,13 +72,13 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         stage.show(); //Exibe a GUI do jogo
     }
 
-    private void setupObjects() {
-        entityObject.clear();
-        uiObject.clear();
-        mapObject.clear();
+    public static void setupObjects() {
+        entityObjectList.clear();
+        uiObjectList.clear();
+        mapObjectList.clear();
         
-        uiObject.add(ga);
-        uiObject.add(ui);
+        uiObjectList.add(gameAreaObject);
+        uiObjectList.add(uiObject);
     }
     
     public static void main(String[] args) {
@@ -90,8 +91,8 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         public void handle(KeyEvent e) {
             String code = e.getCode().toString();
 
-            if (!input.contains(code)) { //Evita duplicatas
-                input.add(code);
+            if (!inputArray.contains(code)) { //Evita duplicatas
+                inputArray.add(code);
             }
         }
     }
@@ -101,7 +102,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         @Override
         public void handle(KeyEvent e) {
             String code = e.getCode().toString();
-            input.remove(code);
+            inputArray.remove(code);
         }
     }
 

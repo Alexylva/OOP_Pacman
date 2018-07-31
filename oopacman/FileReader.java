@@ -26,7 +26,8 @@ public class FileReader {
 
         List<String> lines = Files.readAllLines(path);
         String[] matrizLinha = lines.toArray(new String[0]); //new String[0] serve pra ele retornar a matriz no tipo certo
-
+        matrizLinha[0] = matrizLinha[0].substring(1); //Fixes missing block
+        
         for (int i = 0; i < this.linhas; i++) {
             char[] matrizChar = matrizLinha[i].toCharArray();
 

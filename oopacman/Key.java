@@ -1,7 +1,7 @@
 package oopacman;
 
-import static oopacman.OOPacman.input;
 import java.util.Random;
+import static oopacman.OOPacman.inputArray;
 
 /**
  * Class
@@ -26,7 +26,7 @@ public enum Key {
         }
         
         public static boolean isPressed(Key key) {
-            return input.contains(key.toString());
+            return inputArray.contains(key.toString());
         }
 
         public static Key getRandomDir() {

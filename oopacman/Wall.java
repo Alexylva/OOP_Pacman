@@ -24,7 +24,7 @@ public class Wall extends StaticEntity {
     private Color color = new Color(1.00, 1.00, 0.50, 1.0);
     public Wall(int x, int y) {
         super(x, y, "Wall");
-        setSize((int) Math.floor(OOPacman.ga.getWidth()/15));
+        setSize((int) Math.floor(OOPacman.gameAreaObject.getWidth()/15));
     }
 
     @Override

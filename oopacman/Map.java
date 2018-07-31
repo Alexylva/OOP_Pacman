@@ -15,8 +15,8 @@ public class Map implements UIObject {
     private StaticEntity[][] map;
     public static final int gridLines = 20, gridColumns = 15; //4:3
     //Real width, height
-    private int width = (int) floor(OOPacman.ga.getWidth()),
-            height = (int) floor(OOPacman.ga.getHeight());
+    private int width = (int) floor(OOPacman.gameAreaObject.getWidth()),
+            height = (int) floor(OOPacman.gameAreaObject.getHeight());
     public final int squareSize = width/gridColumns;
 
     public Map(String pathToMapFile) {
@@ -44,16 +44,16 @@ public class Map implements UIObject {
                         break;
                     case 2:
                         int[] other = snapToGrid(grid[0], grid[1]);                        
-                        entityObject.add(new Pacman(other[0], other[1]));
+                        entityObjectList.add(new Pacman(other[0], other[1]));
                         break;
                     case 3:
-                        entityObject.add(new Ghost(grid[0], grid[1], new Color(1.00, 0, 0, 1.0)));
+                        entityObjectList.add(new Ghost(grid[0], grid[1], new Color(1.00, 0, 0, 1.0)));
                         break;
                     case 4:
-                        entityObject.add(new Ghost(grid[0], grid[1], new Color(0, 1.00, 0, 1.0)));
+                        entityObjectList.add(new Ghost(grid[0], grid[1], new Color(0, 1.00, 0, 1.0)));
                         break;
                     case 5:
-                        entityObject.add(new Ghost(grid[0], grid[1], new Color(0, 0, 1.00, 1.0)));
+                        entityObjectList.add(new Ghost(grid[0], grid[1], new Color(0, 0, 1.00, 1.0)));
                         break;
                     default:
                         break;

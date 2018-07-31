@@ -9,7 +9,7 @@ public class Path extends StaticEntity {
 
     public Path(int x, int y) {
         super(x, y, "Path");
-        setSize((int) Math.floor(OOPacman.ga.getWidth()/15));
+        setSize((int) Math.floor(OOPacman.gameAreaObject.getWidth()/15));
     }
 
     public void capturar(){
