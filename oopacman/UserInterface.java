@@ -20,7 +20,10 @@ public class UserInterface implements UIObject {
         public int getScore() {
                 return this.score;
         }
-
+        
+        public static void resetScore() {
+                UserInterface.score = 0;
+        }
         public static void addScore(int score) {
                 UserInterface.score += score;
         }

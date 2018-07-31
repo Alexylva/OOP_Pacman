@@ -39,7 +39,7 @@ public class Ghost extends Actor {
 
     @Override
     public void update(GraphicsContext gc, double time) {
-        if (getStatus() == IDLE || Draw.frameCount%100 == 0) {
+        if (getStatus() == IDLE || Draw.frameCount%100   == 0) {
             System.out.println(time);
             direcionar(Key.getRandomDir(), getSpeed());
         }
