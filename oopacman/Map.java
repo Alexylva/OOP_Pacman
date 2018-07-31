@@ -18,12 +18,17 @@ public class Map implements UIObject {
     private int width = (int) floor(OOPacman.ga.getWidth()),
             height = (int) floor(OOPacman.ga.getHeight());
     public final int squareSize = width/gridColumns;
+    private int pontosTotais = 0;
 
     public Map(String pathToMapFile) {
         map = new StaticEntity[gridLines][gridColumns];
         int[][] mapInt = this.readMap(pathToMapFile);
         this.criarMapa(mapInt);
 
+    }
+    
+    public int getPontosTotais(){
+        return this.pontosTotais;
     }
 
     public StaticEntity getStaticEntity(int x, int y){
@@ -38,6 +43,7 @@ public class Map implements UIObject {
                 switch (mapaInt[i][j]) {
                     case 0:
                         this.map[i][j] = new Path(grid[0], grid[1]);
+                        this.pontosTotais += 100;
                         break;
                     case 1:
                         this.map[i][j] = new Wall(grid[0], grid[1]);
