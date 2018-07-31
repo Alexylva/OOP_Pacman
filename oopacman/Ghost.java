@@ -4,8 +4,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import static oopacman.Actor.Status.IDLE;
 
-import static oopacman.Key.*;
-
 public class Ghost extends Actor {
 
     private Color cor;
@@ -26,19 +24,19 @@ public class Ghost extends Actor {
     }
 
     @Override
-    public void render(GraphicsContext gc) {
-        gc.setFill(getCor());//cor do corpo do fantasma
-        gc.fillRect(getX(), getY() + getSize() / 2, getSize(), getSize() / 2);//parte quadrada do fantasma
-        gc.fillOval(getX(), getY(), getSize(), getSize() * 0.95);//parte redonda
+    public void render(GraphicsContext graphics) {
+        graphics.setFill(getCor());//cor do corpo do fantasma
+        graphics.fillRect(getX(), getY() + getSize() / 2, getSize(), getSize() / 2);//parte quadrada do fantasma
+        graphics.fillOval(getX(), getY(), getSize(), getSize() * 0.95);//parte redonda
 
-        gc.setFill(Color.BLACK);//cor dos olhos
-        gc.fillOval(getX() + 0.2 * getSize(), getY() + getSize() / 4, getSize() * 0.16, getSize() * 0.16);//olho esquerdo
-        gc.fillOval(getX() + 0.62 * getSize(), getY() + getSize() / 4, getSize() * 0.16, getSize() * 0.16);//olho direito
+        graphics.setFill(Color.BLACK);//cor dos olhos
+        graphics.fillOval(getX() + 0.2 * getSize(), getY() + getSize() / 4, getSize() * 0.16, getSize() * 0.16);//olho esquerdo
+        graphics.fillOval(getX() + 0.62 * getSize(), getY() + getSize() / 4, getSize() * 0.16, getSize() * 0.16);//olho direito
 
     }
 
     @Override
-    public void update(GraphicsContext gc) {
+    public void update(GraphicsContext graphics) {
         if (getStatus() == IDLE || Draw.frameCount%100   == 0) {
             direcionar(Key.getRandomDir(), getSpeed());
         }

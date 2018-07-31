@@ -24,16 +24,16 @@ public class Pacman extends Actor {
     }
 
     @Override
-    public void render(GraphicsContext gc) {
-        gc.setFill(new Color(1.00, 1.00, 0.50, 1.0));
-        gc.setStroke(new Color(0, 0, 0, 1));
-        gc.fillOval(getX(), getY(), getSize(), getSize());
-        gc.strokeOval(getX(), getY(), getSize(), getSize());
+    public void render(GraphicsContext graphics) {
+        graphics.setFill(new Color(1.00, 1.00, 0.50, 1.0));
+        graphics.setStroke(new Color(0, 0, 0, 1));
+        graphics.fillOval(getX(), getY(), getSize(), getSize());
+        graphics.strokeOval(getX(), getY(), getSize(), getSize());
     }
     String lastStatus = "";
 
     @Override
-    public void update(GraphicsContext gc) {
+    public void update(GraphicsContext graphics) {
         direcionar(); //Obtem comandos do jogador
         mover(); //Realiza o movimento
         checkPathCollision(); //Colidiu com Path?
