@@ -5,10 +5,6 @@
  */
 package oopacman;
 
-/**
- *
- * @author Alexylva
- */
 public abstract class StaticEntity implements GameObject {
     private int x, y, size;
     private String tipo;

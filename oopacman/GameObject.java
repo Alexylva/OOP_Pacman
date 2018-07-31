@@ -7,13 +7,9 @@ package oopacman;
 
 import javafx.scene.canvas.GraphicsContext;
 
-/**
- *
- * @author Alexylva
- */
 public interface GameObject {
 
-    public void render(GraphicsContext gc);
+    public void render(GraphicsContext graphics); //Logica de desenho na tela
 
-    public void update(GraphicsContext gc);
+    public void update(GraphicsContext graphics); //Logica de atualização
 }

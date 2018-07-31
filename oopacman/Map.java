@@ -143,6 +143,9 @@ public class Map implements GameObject {
 
     @Override
     public void update(GraphicsContext gc) {
+        if (UserInterface.getScore() >= getPontosTotais()) {
+            Draw.setMode(Draw.Mode.WIN);
+        }
     }
 
 }

@@ -56,14 +56,14 @@ abstract class Actor extends Entity {
         Wall wall;
         if (null != getStatus()) {
             switch (getStatus()) {
-                case IDLE:
+                case IDLE: //Looking at wall
                     break;
-                case BUFFERED:
+                case BUFFERED: //Has commands
                     if (canTurn()) {
                         setDirection(getBuffer());
                         setStatus(MOVING);
                     }
-                case MOVING:
+                case MOVING: //You guessed it
                     wall = mapObject.dirIsFree(getGridX(), getGridY(), getDirection());
                     if (wall != null) {
                         switch (getDirection()) {

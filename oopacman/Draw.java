@@ -6,12 +6,8 @@
 package oopacman;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import static oopacman.Key.*;
 import static oopacman.OOPacman.*;
 
@@ -35,32 +31,37 @@ public class Draw extends AnimationTimer {
 
     @Override
     public void handle(long currentNanoTime) {
-        
+
         switch (getMode()) {
-            case MENU:
-                
+            case MENU: //Spaguetti
+
                 graphics.setFill(new Color(0, 0, 0, 1));
                 graphics.fill();
                 graphics.fillRect(0, 0, WIDTH, HEIGHT);
                 graphics.setFill(new Color(1, 1, 1, 1));
-                graphics.setFont(Font.font("Tahoma", 20));
-                 try {Thread.sleep(100);} catch (Exception e) {}
-                if(isPressed(UP)) {
-                    selection = ((selection==0)?mapsFileList.size()-1:(selection-1)%mapsFileList.size());
+                graphics.setFont(font);
+                graphics.save();
+                graphics.scale(2, 2);
+                graphics.setFill(new Color(1, 1, .2, 1));
+                graphics.fillText("OOPACMAN", WIDTH * 0.15, HEIGHT * 0.15);
+                graphics.restore();
+
+                sleep(100);
+
+                if (isPressed(UP)) {
+                    selection = ((selection == 0) ? mapsFileList.size() - 1 : (selection - 1) % mapsFileList.size());
                 } else if (isPressed(DOWN)) {
-                    selection = ((selection+1)%mapsFileList.size());
+                    selection = ((selection + 1) % mapsFileList.size());
                 } else if (isPressed(RIGHT)) {
-                  try {Thread.sleep(1000);} catch (Exception e) {}
-                  OOPacman.setupObjects();
-                  OOPacman.mapObject = new Map(mapsFileList.get(selection));
-                  mapObjectList.add(mapObject);
-                  setMode(Mode.GAME);
-                }                
+                    sleep(1000);
+                    level = selection;
+                    OOPacman.setupGame(level);
+                }
                 for (String c : mapsFileList) {
                     if (selection == mapsFileList.indexOf(c)) {
-                        graphics.fillText("=> " + c, WIDTH/4, HEIGHT/2+mapsFileList.indexOf(c)*20);
+                        graphics.fillText("=> " + c, WIDTH / 4 + frameCount % 5, HEIGHT / 2 + mapsFileList.indexOf(c) * font.getSize() + 1);
                     } else {
-                        graphics.fillText("   " + c, WIDTH/4, HEIGHT/2+mapsFileList.indexOf(c)*20);
+                        graphics.fillText("   " + c, WIDTH / 4, HEIGHT / 2 + mapsFileList.indexOf(c) * font.getSize() + 1);
                     }
                 }
 
@@ -75,22 +76,28 @@ public class Draw extends AnimationTimer {
 
                 graphics.save();
                 graphics.translate(gameAreaObject.getX(), gameAreaObject.getY()); //Seta novo ponto 0,0 no canto da gameArea
+                updateEntities(mapObjectList);
                 renderEntities(mapObjectList);
                 updateEntities(entityObjectList);
                 renderEntities(entityObjectList);
                 graphics.restore();
-                frameCount++;
                 break;
             case GAMEOVER:
-                try {Thread.sleep(1000);} catch (Exception e) {}
+                sleep(1000);
                 UserInterface.resetScore();
-            case WIN:
-                setMode(Mode.MENU); //TODO
+                OOPacman.setupGame(level);
                 break;
-            default:
-                throw new AssertionError(getMode().name());
+            case WIN:
+                sleep(1000);
+                level++;
+                if (level > mapsFileList.size() - 1) {
+                    setMode(Draw.Mode.MENU);
+                }
+                OOPacman.setupGame(level);
+                break;
 
         }
+        frameCount++;
     }
 
     public Mode getMode() {
@@ -101,6 +108,13 @@ public class Draw extends AnimationTimer {
         Draw.mode = mode;
     }
 
+    private void sleep(int i) {
+        try {
+            Thread.sleep(i);
+        } catch (Exception e) {
+        }
+    }
+
     public void updateEntities(ArrayList<GameObject> gameobjects) {
         for (GameObject gob : gameobjects) {
             if (gob != null) {
@@ -109,12 +123,6 @@ public class Draw extends AnimationTimer {
         }
     }
 
-    /**
-     * Realiza a logica de renderização de cada entidade
-     *
-     * @param gameobjects Array de entidades
-     * @param time Tempo atual
-     */
     public void renderEntities(ArrayList<GameObject> gameobjects) {
         for (GameObject gob : gameobjects) {
             if (gob != null) {

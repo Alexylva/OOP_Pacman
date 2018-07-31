@@ -3,10 +3,6 @@ package oopacman;
 import java.util.Random;
 import static oopacman.OOPacman.inputArray;
 
-/**
- * Class
- * @author Alexylva
- */
 public enum Key {
         UP("UP"), DOWN("DOWN"), LEFT("LEFT"), RIGHT("RIGHT");
 

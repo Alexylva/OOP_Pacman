@@ -2,15 +2,14 @@ package oopacman;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReader {
-    private int linhas;
-    private int colunas;
+    private final int linhas;
+    private final int colunas;
 
 
     public FileReader(int linhas, int colunas){
