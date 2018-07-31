@@ -24,11 +24,13 @@ public class Path extends StaticEntity {
     public void render(GraphicsContext gc, double time) {
         Color fill;
         if (capturado) { fill = new Color(0,0,0,1); }
-        else { fill = new Color(0.16,0.16,0.38,1); }
-        gc.setFill(fill);//não sei colocar cor, precisa mudar a cor se capturado == true
+        else { fill = new Color(1.0, 1.0, 0, 1); }
+        gc.setFill(Color.BLACK);
         gc.setStroke(new Color(1,1,1,1));
         gc.fillRect(getX(), getY(), getSize(), getSize());
         gc.strokeRect(getX(), getY(), getSize(), getSize());
+        gc.setFill(fill);
+        gc.fillOval(getX() + 0.33*getSize(), getY() + 0.33*getSize(), getSize()*0.33, getSize()*0.33);
     }
 
     @Override
